@@ -1,0 +1,31 @@
+#the-card-text{
+    height: 30rem;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-style: solid;
+    border-width: 50px;
+    border: yellow;
+}
+
+#the-card{
+    background-color: aliceblue;
+    overflow: scroll;
+}
+
+#backgroundImg{
+    background-image: url(../images/oldManHittingBong.jpg);
+}
+
+.spacer{
+    height: 50px;
+}
+
+button{
+    color: aliceblue;
+}
+
+#stackSelector{
+    background-color: #AE804F;
+}
