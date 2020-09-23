@@ -10,7 +10,7 @@
 
 </head>
 <body id="backgroundImg">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
         <h3 class="navbar-brand">JavaScript Quiz Game</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,10 +18,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav text-right ml-auto">
                 <li class="nav-item ">
-                    <a href="resources/resourses.html" class="nav-link">Resource Links</a>
-                </li>
-                <li class="nav-item">
-                    <a href="resources/weeklyChallenge.html" class="nav-link">Weekly Challenge</a>
+                    <a href="resources/resourses.html" class="nav-link">High Scores</a>
                 </li>
             </ul>
             
@@ -32,7 +29,7 @@
         <div class="container">
             <div class="col-6 col-md-4 p-2 mt-2" id="starterBlock">
                 <h4 id="startBlockText">Press the start button to begin!</h4>
-                <button class="bg-dark">
+                <button class="bg-dark" id="startBtn">
                     start
                 </button>
             </div>
@@ -40,18 +37,8 @@
                 <div class="col spacer"></div>
             </div>
             <div class="row">
-                <div class="col-md-8 m-auto" id="the-card">
+                <div class="col-md-10 m-auto" id="the-card">
                     <p class="d-flex align-items-center justify-content-center" id="the-card-text">Select New Card To Get Started</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col d-flex justify-content-center mt-2">
-                    <button class="bg-dark" id="flip-button">
-                        flip
-                    </button>
-                    <button class="bg-dark" id="new-card">
-                        new card
-                    </button>
                 </div>
             </div>
             <div class="row">
