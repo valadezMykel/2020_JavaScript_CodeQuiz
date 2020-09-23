@@ -1,10 +1,16 @@
 
 var starterBlockEl = document.getElementById("starterBlock");
+var cardText = document.getElementById("the-card-text")
+
+var questionObjectArr = [] 
 
 var timer = 5;
 
-document.getElementById("startBtn").addEventListener("click", function(){
+starterBlockEl.onclick = function(event) {console.log(event.target)}
+
+starterBlockEl.children[1].addEventListener("click", function(){
     // removes the start button
+    console.log(document.getElementById("startBtn"));
     starterBlockEl.removeChild(starterBlockEl.children[1]);
     // starts the timer
     var timerInterval = setInterval(function(){
@@ -21,20 +27,24 @@ document.getElementById("startBtn").addEventListener("click", function(){
 
         
     }, 1000)
-
+    console.log(timer);
+    
 });
 
-function quizGame {
-    
+function quizGame() {
+
+
 }
 
 
 
 function placeStartBtn(){
-    let startBtnEl = document.createElement("button")
+    var startBtnEl = document.createElement("button")
     startBtnEl.textContent = "start";
     startBtnEl.setAttribute("class", "bg-dark");
     startBtnEl.setAttribute("id", "startBtn");
     starterBlockEl.appendChild(startBtnEl);
-
+    console.log(startBtnEl);
+    console.log(document.getElementById("startBtn"));
+    console.log(starterBlockEl);
 }
