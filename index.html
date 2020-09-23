@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UW Bootcamp Flashcards</title>
+    <title>JavaScript Quiz</title>
     <link rel="stylesheet" href="resources/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -11,7 +11,7 @@
 </head>
 <body id="backgroundImg">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <h3 class="navbar-brand">UW Bootcamp Flashcards</h3>
+        <h3 class="navbar-brand">JavaScript Quiz Game</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,13 +30,11 @@
 
     <main>
         <div class="container">
-            <div class="col-6 col-md-4 p-2 mt-2" id="stackSelector">
-                <h4>Select a Category</h4>
-                <select>
-                    <option value="allOption">All</option>
-                    <option value="gitOption">Git Commands</option>
-                    <option value="javascriptOption">Java Script</option>
-                </select>
+            <div class="col-6 col-md-4 p-2 mt-2" id="starterBlock">
+                <h4 id="startBlockText">Press the start button to begin!</h4>
+                <button class="bg-dark">
+                    start
+                </button>
             </div>
             <div class="row">
                 <div class="col spacer"></div>
@@ -62,7 +60,7 @@
         </div>
 
     </main>
-    <script src="theGoods.js"></script>
+    <script src="assets/JavaScript/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
