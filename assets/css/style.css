@@ -27,5 +27,13 @@ button{
 }
 
 #starterBlock{
+    height: 100px;
     background-color: #AE804F;
+}
+
+.answerBtn{
+    color: black;
+    margin-bottom: 20px;
+
+
 }
