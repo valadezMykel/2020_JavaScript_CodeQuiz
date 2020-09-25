@@ -3,7 +3,7 @@ var starterBlockEl = document.getElementById("starterBlock");
 var cardTextEl = document.getElementById("the-card-text");
 var cardEl = document.getElementById("the-card");
 
-var question = {quest: "Who are you?", answers: ["you", "they", "me", "we"], correctAnswer: "me" }
+var question = {quest: "Who are you?", answers: ["you", "they", "me", "we"], correctAnswer: 2 }
 var questionObjectArr = [question] 
 
 var timer = 5;
@@ -34,31 +34,43 @@ function runTimer(){
 }
 
 function quizGame() {
-    console.log("is it working");
     for(let i = 0; i < questionObjectArr.length; i++){
-        console.log("in here");
         addQuizItems(questionObjectArr[i]);
     }
-
-
 
 };
 // var question = {question: "Who are you?", answers: ["you", "they", "me", "we"], correctAnswer: "me" }
 
 function addQuizItems(question){
+    // adds the question
     cardTextEl.textContent = question.quest;
+    // adds question buttons
     for(let i = 0; i < question.answers.length; i++){
         
         let newBtn = document.createElement("button");
         newBtn.textContent = question.answers[i];
         newBtn.setAttribute("class", "answerBtn")
         cardEl.children[1].appendChild(newBtn);
-        console.log("proof it is looping")
+        // will assign event handlers that assign pass or fail function
+        checkAnswer(i);
+    }
+}
+function checkAnswer(i){
+    if(question.correctAnswer === i){
+        console.log("I shouldn't be in here");
+        cardEl.children[1].children[i].addEventListener("click", pass);
+    }
+    else{
+        cardEl.children[1].children[i].addEventListener("click", fail);
     }
 }
 
-function checkAnswer(){
+function pass(){
+    console.log("you go it right");
+}
 
+function fail(){
+    console.log("you got it wrong");
 }
 // makes a new start button and listener
 function placeStartBtn(){
