@@ -7,7 +7,10 @@ var question1 = {quest: "Who are you?", answers: ["you", "they", "me", "we"], co
 let question2 ={quest: "How many days was JavaScript made in?", answers: ["7", "10", "18", "35"], correctAnswer: 1 };
 var questionObjectArr = [question1, question2]; 
 
-var timer = 15;
+let timerVar = 30;
+var timer = timerVar;
+var stopTimer = false;
+
 let currentQuestion = 0;
 let score = 0;
 
@@ -24,49 +27,51 @@ function runTimer(){
     var timerInterval = setInterval(function(){
         starterBlockEl.children[0].textContent = timer + " seconds remain";
         timer--;
+        if(stopTimer){
+            clearInterval(timerInterval);
+        };
         if(timer < 0){
             clearInterval(timerInterval)
             placeStartBtn()
-            timer = 15;
+            timer = timerVar;
             currentQuestion = 0;
             starterBlockEl.children[0].textContent = "You have failed the quiz!!"
 
-        }
+        };
         
     }, 1000)
 }
-console.log(questionObjectArr.length);
+
+// one round of the game that recalls its function after each round
 function quizGameRound() {
     if(currentQuestion < questionObjectArr.length){
-        
+        console.log("running quiz game round")
         // this will output the question and answers to the card
         // each answer has a data-correct class to indicate if it is correct
         addQuizItems(questionObjectArr[currentQuestion]);
         // listens for button clicks on the card
-        cardEl.addEventListener("click", (event) => {
+        cardEl.addEventListener("click", function() {
             // checks if an answer button was pressed
             if(event.target.matches("button")){
                 // checks the correctness of answer button
                 if(event.target.getAttribute("data-correct") === "true"){
-                    cardTextEl.textContent = "Correct!";
-                    removeQuizItems(questionObjectArr[currentQuestion]);
-                    currentQuestion++;
-                    quizGameRound();
-    
+                    // cardTextEl.textContent = "Correct!";
                 }
                 else{
                     cardTextEl.textContent = "Incorrect";
-                    removeQuizItems(questionObjectArr[currentQuestion]);
-                    currentQuestion++;
-                    quizGameRound();
-                }
-    
-            }
+                    timer -= 10;
+                };
+
+                //goes to the next question in questionObjectArr
+                removeQuizItems(questionObjectArr[currentQuestion]);
+                currentQuestion++;
+                quizGameRound();
+            };
         });
     }
     else{
         endingSequence();
-    }
+    };
     
 
 };
@@ -101,7 +106,14 @@ function removeQuizItems(question){
 }
 
 function endingSequence(){
-    alert("the game is over");
+    console.log("endingSequence started")
+    stopTimer = true;
+
+    score = timer;
+    console.log(score);
+    console.log("still working 1")
+    cardTextEl.textContent = "Your Score is "+score;
+    console.log("still working 2")
 }
 
 // makes a new start button and listener
