@@ -19,7 +19,7 @@
 }
 
 .spacer{
-    height: 50px;
+    height: 35px;
 }
 
 button{
@@ -32,10 +32,12 @@ button{
 }
 
 .answerBtn{
-    color: black;
+    color: white;
     margin-bottom: 20px;
     display: block;
     width: 25%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
 
 }
