@@ -2,16 +2,18 @@
 var starterBlockEl = document.getElementById("starterBlock");
 var cardTextEl = document.getElementById("the-card-text");
 var cardEl = document.getElementById("the-card");
+let corrBlockEl = document.getElementById("correctnessBlock");
 
 var question1 = {quest: "Who are you?", answers: ["you", "they", "me", "we"], correctAnswer: 2 };
 let question2 ={quest: "How many days was JavaScript made in?", answers: ["7", "10", "18", "35"], correctAnswer: 1 };
-var questionObjectArr = [question1, question2]; 
+let question3 = {quest: "Which of the variable types is hoisted?", answers: ["var", "const", "let"], correctAnswer: 0 };
+var questionObjectArr = [question1, question2, question3]; 
 
 let timerVar = 30;
 var timer = timerVar;
 var stopTimer = false;
 
-let currentQuestion = 0;
+var currentQuestion = 0;
 let score = 0;
 
 // listens at the start button to start the game timer
@@ -22,6 +24,7 @@ document.getElementById("startBtn").addEventListener("click", runTimer);
 function runTimer(){
     // removes the start button
     starterBlockEl.removeChild(starterBlockEl.children[1]);
+    currentQuestion = 0;
     quizGameRound();
     // starts the timer
     var timerInterval = setInterval(function(){
@@ -29,6 +32,9 @@ function runTimer(){
         timer--;
         if(stopTimer){
             clearInterval(timerInterval);
+            timer = timerVar;
+            currentQuestion = 0;
+            placeStartBtn();
         };
         if(timer < 0){
             clearInterval(timerInterval)
@@ -42,32 +48,50 @@ function runTimer(){
     }, 1000)
 }
 
+
+cardEl.addEventListener("click", function() {
+    // checks if an answer button was pressed
+    if(event.target.matches("button")){
+        console.log("button clicked")
+        // checks the correctness of answer button
+        if(event.target.getAttribute("data-correct") === "true"){
+            
+            corrBlockEl.style.color = "Black";
+            corrBlockEl.textContent = "Correct!";
+            corrBlockEl.classList.remove("invisible");
+            setTimeout(() => {
+                corrBlockEl.classList.add("invisible");
+            }, 2000);
+        }
+        else{
+            console.log("start")
+            corrBlockEl.style.color = "red";
+            corrBlockEl.textContent = "Incorrect";
+            corrBlockEl.classList.remove("invisible");
+            setTimeout(() => {
+                corrBlockEl.classList.add("invisible");
+            }, 2000);
+            timer -= 10;
+            
+        };
+
+        //goes to the next question in questionObjectArr
+        removeQuizItems(questionObjectArr[currentQuestion]);
+        currentQuestion++;
+        quizGameRound();
+    };
+});
+
 // one round of the game that recalls its function after each round
 function quizGameRound() {
     if(currentQuestion < questionObjectArr.length){
         console.log("running quiz game round")
+        console.log(currentQuestion);
         // this will output the question and answers to the card
         // each answer has a data-correct class to indicate if it is correct
         addQuizItems(questionObjectArr[currentQuestion]);
         // listens for button clicks on the card
-        cardEl.addEventListener("click", function() {
-            // checks if an answer button was pressed
-            if(event.target.matches("button")){
-                // checks the correctness of answer button
-                if(event.target.getAttribute("data-correct") === "true"){
-                    // cardTextEl.textContent = "Correct!";
-                }
-                else{
-                    cardTextEl.textContent = "Incorrect";
-                    timer -= 10;
-                };
 
-                //goes to the next question in questionObjectArr
-                removeQuizItems(questionObjectArr[currentQuestion]);
-                currentQuestion++;
-                quizGameRound();
-            };
-        });
     }
     else{
         endingSequence();
@@ -100,8 +124,12 @@ function addQuizItems(question){
 // removes answer buttons from the card
 function removeQuizItems(question){
     // removes each from last added to first
-    for(let i = (question.answers.length - 1); i >= 0; i--){
+    console.log(question);
+    for(let i = question.answers.length - 1; i >= 0; i--){
+        console.log(i);
+        console.log(cardEl.children[1].children[i]);
         cardEl.children[1].children[i].remove();
+
     }
 }
 
@@ -110,10 +138,9 @@ function endingSequence(){
     stopTimer = true;
 
     score = timer;
+    currentQuestion = 0;
     console.log(score);
-    console.log("still working 1")
     cardTextEl.textContent = "Your Score is "+score;
-    console.log("still working 2")
 }
 
 // makes a new start button and listener

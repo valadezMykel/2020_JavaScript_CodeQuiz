@@ -13,6 +13,7 @@
     overflow: scroll;
 }
 
+
 #backgroundImg{
     background-image: url(../images/oldManHittingBong.jpg);
 }
@@ -30,6 +31,13 @@ button{
     background-color: #AE804F;
 }
 
+#correctnessBlock{
+    background-color: #AE804F;
+    height: 100px;
+    font-size: 50px;
+    
+}
+
 .answerBtn{
     color: white;
     margin-bottom: 20px;
@@ -37,6 +45,7 @@ button{
     width: 25%;
     padding-top: 20px;
     padding-bottom: 20px;
+    font-size: 20px;
 
 
 }
