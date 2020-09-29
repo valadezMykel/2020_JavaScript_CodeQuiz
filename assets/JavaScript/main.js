@@ -9,12 +9,12 @@ let question2 ={quest: "How many days was JavaScript made in?", answers: ["7", "
 let question3 = {quest: "Which of the variable types is hoisted?", answers: ["var", "const", "let"], correctAnswer: 0 };
 var questionObjectArr = [question1, question2, question3]; 
 
+// variables used in multiple functions
 let timerVar = 30;
 var timer = timerVar;
 var stopTimer = false;
 let storageScoresArr = [];
 var currentQuestion = 0;
-let score = 0;
 
 // listens at the start button to start the game timer
 document.getElementById("startBtn").addEventListener("click", runTimer);
@@ -104,9 +104,8 @@ function quizGameRound() {
     }
     else{
         stopTimer = true;
-        score = timer;
+        let score = timer;
         currentQuestion = 0;
-        console.log(score);
         cardTextEl.textContent = "Your Score is "+score;
         if(confirm("would you like to save your score of "+score+"?")){
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Quiz</title>
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -24,6 +24,7 @@
 
     <main>
         <div class="container">
+            <!-- this div row contains the timer, start buttons, and a pop up if the users answer is right or wrong -->
             <div class="row d-flex">
 
                 <div class="col-6 col-md-4 p-2 mt-2" id="starterBlock">
@@ -33,19 +34,19 @@
                 <div class="col-6 col-md-4 p-2 mt-2 ml-auto invisible" id="correctnessBlock">
     
                 </div>
+            <!-- to create space between element rows -->
             </div>
                 <div class="col spacer"></div>
             </div>
+            <!-- the area where questions and answers appear -->
             <div class="row">
                 <div class="col-md-10 m-auto" id="the-card">
                     <p class="d-flex justify-content-center" id="the-card-text">Hit start and questions will appear here</p>
+                    <!-- where the answer buttons appends to -->
                     <div class="d-flex align-items-center justify-content-around">
 
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col spacer"></div>
             </div>
         </div>
 

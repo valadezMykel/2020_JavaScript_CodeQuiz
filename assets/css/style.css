@@ -1,3 +1,5 @@
+
+/* elements in navbar */
 #high-score-button{
     color: white;
 }
@@ -8,10 +10,12 @@
 
 }
 
+/* applied image to body */
 #backgroundImg{
     background-image: url(../images/oldManHittingBong.jpg);
 }
 
+/* above the element that shows questions */
 #starterBlock{
     height: 100px;
     background-color: #AE804F;
@@ -32,6 +36,7 @@ button{
     height: 35px;
 }
 
+/* inside the element that displays questions and answers */
 #the-card{
     background-color: aliceblue;
     height: 25rem;
