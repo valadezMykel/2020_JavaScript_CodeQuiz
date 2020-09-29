@@ -27,7 +27,6 @@ showOldScores();
 function runTimer(){
     // removes the start button
     starterBlockEl.removeChild(starterBlockEl.children[1]);
-    currentQuestion = 0;
     quizGameRound();
     // starts the timer
     var timerInterval = setInterval(function(){
@@ -37,7 +36,9 @@ function runTimer(){
             clearInterval(timerInterval);
             timer = timerVar;
             currentQuestion = 0;
+            starterBlockEl.children[0].textContent = "Would you like to try again?";
             placeStartBtn();
+            stopTimer = false;
         };
         if(timer < 0){
             clearInterval(timerInterval)
@@ -50,6 +51,16 @@ function runTimer(){
         
     }, 1000)
 }
+
+// makes a new start button and listener
+function placeStartBtn(){
+    var startBtnEl = document.createElement("button")
+    startBtnEl.textContent = "re-start";
+    startBtnEl.setAttribute("class", "bg-dark");
+    // startBtnEl.setAttribute("id", "startBtn");
+    starterBlockEl.appendChild(startBtnEl);
+    startBtnEl.addEventListener("click", runTimer);
+};
 
 // listens for button presses on the card
 cardEl.addEventListener("click", function() {
@@ -84,6 +95,7 @@ cardEl.addEventListener("click", function() {
 });
 
 // one round of the game if ran when no more questions are left ends game
+// stores an array of arrays of [initials, scores] to local storage
 function quizGameRound() {
     if(currentQuestion < questionObjectArr.length){
         // this will output the question and answers to the card
@@ -177,12 +189,3 @@ function removeQuizItems(question){
     }
 }
 
-// makes a new start button and listener
-function placeStartBtn(){
-    var startBtnEl = document.createElement("button")
-    startBtnEl.textContent = "re-start";
-    startBtnEl.setAttribute("class", "bg-dark");
-    startBtnEl.setAttribute("id", "startBtn");
-    starterBlockEl.appendChild(startBtnEl);
-    startBtnEl.addEventListener("click", runTimer);
-};
