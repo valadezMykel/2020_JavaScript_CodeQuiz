@@ -1,3 +1,13 @@
+#high-score-button{
+    color: white;
+}
+
+#high-score-list {
+    color: white;
+    margin-bottom: 5px;
+
+}
+
 #the-card-text{
     height: 15rem;
     font-size: 3rem;

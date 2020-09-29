@@ -12,12 +12,15 @@ var questionObjectArr = [question1, question2, question3];
 let timerVar = 30;
 var timer = timerVar;
 var stopTimer = false;
-
+let storageScoresArr = [];
 var currentQuestion = 0;
 let score = 0;
 
 // listens at the start button to start the game timer
 document.getElementById("startBtn").addEventListener("click", runTimer);
+
+// Puts in the scores
+showOldScores();
 
 // starts the timer and quizGameRound, removes start button
 // resets timer, currentQuestion, and start button when timer ends
@@ -48,11 +51,10 @@ function runTimer(){
     }, 1000)
 }
 
-
+// listens for button presses on the card
 cardEl.addEventListener("click", function() {
     // checks if an answer button was pressed
     if(event.target.matches("button")){
-        console.log("button clicked")
         // checks the correctness of answer button
         if(event.target.getAttribute("data-correct") === "true"){
             
@@ -64,7 +66,6 @@ cardEl.addEventListener("click", function() {
             }, 2000);
         }
         else{
-            console.log("start")
             corrBlockEl.style.color = "red";
             corrBlockEl.textContent = "Incorrect";
             corrBlockEl.classList.remove("invisible");
@@ -82,23 +83,70 @@ cardEl.addEventListener("click", function() {
     };
 });
 
-// one round of the game that recalls its function after each round
+// one round of the game if ran when no more questions are left ends game
 function quizGameRound() {
     if(currentQuestion < questionObjectArr.length){
-        console.log("running quiz game round")
-        console.log(currentQuestion);
         // this will output the question and answers to the card
         // each answer has a data-correct class to indicate if it is correct
         addQuizItems(questionObjectArr[currentQuestion]);
-        // listens for button clicks on the card
-
     }
     else{
-        endingSequence();
+        stopTimer = true;
+        score = timer;
+        currentQuestion = 0;
+        console.log(score);
+        cardTextEl.textContent = "Your Score is "+score;
+        if(confirm("would you like to save your score of "+score+"?")){
+
+            // gets the users initials
+           let initials = prompt("Please enter your 2 letter initials:");
+           while(initials.length > 2){
+               initials = prompt("invalid initial length, please re-enter your 2 letter initials")
+           };
+           console.log(initials);
+           console.log(score);
+           //gets new score and old scores into storageScoresArr
+           let scoreArr = [initials, score];
+           console.log(scoreArr);
+           // pulls down old scores
+           let oldScores = localStorage.getItem("storedScores");
+           console.log(oldScores);
+           if(oldScores != null){
+               console.log("in old scores")
+               oldScores = JSON.parse(oldScores);
+               console.log(oldScores);
+               console.log(oldScores[0]);
+               storageScoresArr = oldScores;
+           }
+           storageScoresArr.push(scoreArr);
+           console.log(storageScoresArr);
+           //puts the new array into storage
+           storageScoresArr = JSON.stringify(storageScoresArr);
+           localStorage.setItem("storedScores", storageScoresArr);
+
+           //update scores with new score
+           let liEl = document.createElement("li");
+            liEl.textContent = initials+" score of "+score;
+            document.getElementById("high-score-list").appendChild(liEl);
+
+           
+        }
     };
-    
 
 };
+// creates li elements for all previous high scores in local storage
+function showOldScores(){
+    let storedScoresPairsArr = localStorage.getItem("storedScores");
+    storedScoresPairsArr = JSON.parse(storedScoresPairsArr);
+    console.log(storedScoresPairsArr);
+    for(let i = 0; i < storedScoresPairsArr.length; i++){
+        let liEl = document.createElement("li");
+        console.log(storedScoresPairsArr[i][0]);
+        liEl.textContent = storedScoresPairsArr[i][0]+" score of "+storedScoresPairsArr[i][1];
+        console.log(liEl);
+        document.getElementById("high-score-list").appendChild(liEl);
+    }
+}
 
 // outputs stored question and answer groups
 function addQuizItems(question){
@@ -124,23 +172,9 @@ function addQuizItems(question){
 // removes answer buttons from the card
 function removeQuizItems(question){
     // removes each from last added to first
-    console.log(question);
     for(let i = question.answers.length - 1; i >= 0; i--){
-        console.log(i);
-        console.log(cardEl.children[1].children[i]);
         cardEl.children[1].children[i].remove();
-
     }
-}
-
-function endingSequence(){
-    console.log("endingSequence started")
-    stopTimer = true;
-
-    score = timer;
-    currentQuestion = 0;
-    console.log(score);
-    cardTextEl.textContent = "Your Score is "+score;
 }
 
 // makes a new start button and listener
