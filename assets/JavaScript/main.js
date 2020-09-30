@@ -1,13 +1,19 @@
 
+// elements from the DOM
 var starterBlockEl = document.getElementById("starterBlock");
 var cardTextEl = document.getElementById("the-card-text");
 var cardEl = document.getElementById("the-card");
 let corrBlockEl = document.getElementById("correctnessBlock");
 
-var question1 = {quest: "Who are you?", answers: ["you", "they", "me", "we"], correctAnswer: 2 };
-let question2 ={quest: "How many days was JavaScript made in?", answers: ["7", "10", "18", "35"], correctAnswer: 1 };
+// question variables
+// max 4 answer options, min 2
+var question1 = {quest: "When using JavaScript what method should you use instead of spaces?", answers: ["camel case", "hyphenating", "underscore", "periods"], correctAnswer: 0 };
+let question2 = {quest: "How many days was JavaScript made in?", answers: ["7", "10", "18", "35"], correctAnswer: 1 };
 let question3 = {quest: "Which of the variable types is hoisted?", answers: ["var", "const", "let"], correctAnswer: 0 };
-var questionObjectArr = [question1, question2, question3]; 
+let question4 = {quest: "What method can convert objects into strings?", answers: ["toSting", "slice", "substring", "stringify"], correctAnswer: 3 };
+let question5 = {quest: "What data types can be stored in an object?", answers: ["integers", "strings", "arrays", "all three"], correctAnswer: 3};
+
+var questionObjectArr = [question1, question2, question3, question4, question5]; 
 
 // variables used in multiple functions
 let timerVar = 30;
@@ -19,7 +25,7 @@ var currentQuestion = 0;
 // listens at the start button to start the game timer
 document.getElementById("startBtn").addEventListener("click", runTimer);
 
-// Puts in the scores
+// Puts in the previous scores
 showOldScores();
 
 // starts the timer and quizGameRound, removes start button
@@ -32,6 +38,7 @@ function runTimer(){
     var timerInterval = setInterval(function(){
         starterBlockEl.children[0].textContent = timer + " seconds remain";
         timer--;
+        // if the game ends by all questions being answered
         if(stopTimer){
             clearInterval(timerInterval);
             timer = timerVar;
@@ -40,12 +47,14 @@ function runTimer(){
             placeStartBtn();
             stopTimer = false;
         };
+        // if the game ends by the timer running out
         if(timer < 0){
             clearInterval(timerInterval)
-            placeStartBtn()
+            removeQuizItems(questionObjectArr[currentQuestion]);
             timer = timerVar;
             currentQuestion = 0;
-            starterBlockEl.children[0].textContent = "You have failed the quiz!!"
+            starterBlockEl.children[0].textContent = "You have run out of time!"
+            placeStartBtn()
 
         };
         
@@ -148,16 +157,18 @@ function quizGameRound() {
 // creates li elements for all previous high scores in local storage
 function showOldScores(){
     let storedScoresPairsArr = localStorage.getItem("storedScores");
-    storedScoresPairsArr = JSON.parse(storedScoresPairsArr);
-    console.log(storedScoresPairsArr);
-    for(let i = 0; i < storedScoresPairsArr.length; i++){
-        let liEl = document.createElement("li");
-        console.log(storedScoresPairsArr[i][0]);
-        liEl.textContent = storedScoresPairsArr[i][0]+" score of "+storedScoresPairsArr[i][1];
-        console.log(liEl);
-        document.getElementById("high-score-list").appendChild(liEl);
-    }
-}
+    if(storedScoresPairsArr != null){
+        storedScoresPairsArr = JSON.parse(storedScoresPairsArr);
+        sortScores(storedScoresPairsArr);
+        for(let i = 0; i < storedScoresPairsArr.length; i++){
+            let liEl = document.createElement("li");
+            console.log(storedScoresPairsArr[i][0]);
+            liEl.textContent = storedScoresPairsArr[i][0]+" score of "+storedScoresPairsArr[i][1];
+            console.log(liEl);
+            document.getElementById("high-score-list").appendChild(liEl);
+        };
+    };
+};
 
 // outputs stored question and answer groups
 function addQuizItems(question){
@@ -186,5 +197,23 @@ function removeQuizItems(question){
     for(let i = question.answers.length - 1; i >= 0; i--){
         cardEl.children[1].children[i].remove();
     }
-}
+};
 
+// first draft sorter
+function sortScores(arrArr){
+    // checks each score against remaining unsorted scores
+    // sorts so the highest is at the 0 index
+    for(let i = 0; i < arrArr.length; i++){
+        for(let j = i+1 ; j < arrArr.length; j++){
+            if(arrArr[i][1] < arrArr[j][1]){
+                let temp = arrArr[i][1];
+                arrArr[i][1] = arrArr[j][1];
+                arrArr[j][1] = temp;
+            };
+        };        
+    };
+};
+
+// to do list:
+// have the question appear in a random order
+// have the high scores appear from highest to lowest score
