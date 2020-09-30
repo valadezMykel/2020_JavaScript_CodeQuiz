@@ -13,5 +13,11 @@ link to the repository here [repo](https://github.com/valadezMykel/2020_JavaScri
 
 ## About
 
+This program deploys a JavaScript quiz that you can take to refine your knowledge of JavaScript.
+
+![Cite picture](assets/images/startscreen.png)
+
+
+
 
 
