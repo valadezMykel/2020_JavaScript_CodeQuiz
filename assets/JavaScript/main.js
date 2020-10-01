@@ -123,23 +123,15 @@ function quizGameRound() {
            while(initials.length > 2){
                initials = prompt("invalid initial length, please re-enter your 2 letter initials")
            };
-           console.log(initials);
-           console.log(score);
            //gets new score and old scores into storageScoresArr
            let scoreArr = [initials, score];
-           console.log(scoreArr);
            // pulls down old scores
            let oldScores = localStorage.getItem("storedScores");
-           console.log(oldScores);
            if(oldScores != null){
-               console.log("in old scores")
                oldScores = JSON.parse(oldScores);
-               console.log(oldScores);
-               console.log(oldScores[0]);
                storageScoresArr = oldScores;
            }
            storageScoresArr.push(scoreArr);
-           console.log(storageScoresArr);
            //puts the new array into storage
            storageScoresArr = JSON.stringify(storageScoresArr);
            localStorage.setItem("storedScores", storageScoresArr);
@@ -162,9 +154,7 @@ function showOldScores(){
         sortScores(storedScoresPairsArr);
         for(let i = 0; i < storedScoresPairsArr.length; i++){
             let liEl = document.createElement("li");
-            console.log(storedScoresPairsArr[i][0]);
             liEl.textContent = storedScoresPairsArr[i][0]+" score of "+storedScoresPairsArr[i][1];
-            console.log(liEl);
             document.getElementById("high-score-list").appendChild(liEl);
         };
     };
